@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/projCostNavItem"
+        android:icon="@drawable/ic_money_black_24"
+        android:title="@string/explore_option" />
+    <item
+        android:id="@+id/projPerfNavItem"
+        android:icon="@drawable/ic_hourglass_empty_black_24"
+        android:title="@string/evaluate_option" />
+    <item
+        android:id="@+id/pmExpLvlNavItem"
+        android:icon="@drawable/ic_work_black_24"
+        android:title="@string/analyze_option" />
+
+</menu>

@@ -1,0 +1,115 @@
+<resources xmlns:xliff="http://schemas.android.com/tools">
+    <string name="app_name">SOTIP</string>
+    <string name="full_app_name">State of the IT Projects</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="explore_option">Explore</string>
+    <string name="evaluate_option">Evaluate</string>
+    <string name="analyze_option">Analyze</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="content_authority">info.circlespace.sotip</string>
+    <string name="sync_account_type">sotip.circlespace.info</string>
+
+    <string name="init_msg">Initializing app</string>
+    <string name="conn_internet_msg">Please connect to the Internet to initializd this app.</string>
+    <string name="no_data_msg">No data available</string>
+
+    <string name="cost_var">Cost Variance</string>
+    <string name="sch_var">Schedule Variance</string>
+    <string name="perfCmpltdProjs">Completed Projects</string>
+    <string name="perfInProgProjs">In-Progress Projects</string>
+    <string name="pm_exp_lvl">Project Manager Experience Level</string>
+    <string name="pm_exp_lvl_option">PM Experience Level</string>
+    <string name="sdlc_method">Software Development Lifecycle Methodology</string>
+    <string name="sdlc_method_option">SDLC Methodology</string>
+
+    <string name="a11y_total_projects"><xliff:g id="numProjs">%1$s</xliff:g> projects</string>
+
+    <string name="over_budget">over budget</string>
+    <string name="on_budget">on or under budget</string>
+    <string name="under_budget">under budget</string>
+
+    <string name="behind_schedule">behind schedule</string>
+    <string name="on_schedule">on or ahead of schedule</string>
+    <string name="ahead_schedule">ahead of schedule</string>
+
+    <string name="gt_30">over 30%</string>
+    <string name="lt_30">10% to 30%</string>
+    <string name="lt_10">under 10%</string>
+    <string name="gt_0">0% to under 10%</string>
+
+    <string name="well_under_est">well under estimates</string>
+    <string name="within_est">within estimates</string>
+    <string name="slightly_above_est">slightly above estimates</string>
+    <string name="above_est">above estimates</string>
+    <string name="well_above_est">well above estimates</string>
+
+    <string name="cost_var_lvl5">Over budget by over 30%</string>
+    <string name="cost_var_lvl4">Over budget by over 10% up to 30%</string>
+    <string name="cost_var_lvl3">Over budget by up to 10%</string>
+    <string name="cost_var_lvl2">On or below budget by up to 10%</string>
+    <string name="cost_var_lvl1">Below budget from 10% up to 30%</string>
+    <string name="cost_var_lvl0">Below budget by over 30%</string>
+
+    <string name="sch_var_lvl5">Behind schedule by over 30%</string>
+    <string name="sch_var_lvl4">Behind schedule by over 10% up to 30%</string>
+    <string name="sch_var_lvl3">Behind schedule by up to 10%</string>
+    <string name="sch_var_lvl2">On schedule or ahead of schedule by up to 10%</string>
+    <string name="sch_var_lvl1">Ahead of schedule by over 10% up to 30%</string>
+    <string name="sch_var_lvl0">Ahead of schedule by over 30%</string>
+
+    <string name="pm_exp_lvl1">FAC-P/PM(DAWIA-3)- Senior</string>
+    <string name="pm_exp_lvl2">FAC-P/PM(DAWIA-2)- Mid-Level</string>
+    <string name="pm_exp_lvl3">FAC-P/PM(DAWIA-1)- Entry Level</string>
+    <string name="pm_exp_lvl4">Other certification with 4 or more years PM experience (within the last five years)</string>
+    <string name="pm_exp_lvl5">Other certification with between 2 and 4 years PM experience (within the last five years)</string>
+    <string name="pm_exp_lvl6">Other certification with less than two years PM experience (within the last five years)</string>
+    <string name="pm_exp_lvl7">No certification, but with 4 or more years PM experience (within the last five years)</string>
+    <string name="pm_exp_lvl8">No certification, but with between 2 and 4 years PM experience (within the last five years)</string>
+    <string name="pm_exp_lvl9">No certification, but with less than two years PM experience (within the last five years)</string>
+
+    <string name="sdlc_method1">Waterfall</string>
+    <string name="sdlc_method2">Spiral</string>
+    <string name="sdlc_method3">Iterative (Prototyping/Incremental)</string>
+    <string name="sdlc_method4">Agile</string>
+    <string name="sdlc_method5">Mixed</string>
+    <string name="sdlc_method6">Other</string>
+    <string name="sdlc_method7">Not Primarily a Software Development Project</string>
+    <string name="sdlc_method8">Not Given</string>
+
+    <string name="invmt_title">Investment title</string>
+    <string name="proj_name">Project name</string>
+
+    <string name="proj_tab">Project</string>
+    <string name="invmt_tab">Investment</string>
+    <string name="agc_tab">Agency</string>
+
+    <string name="proj_id">Project ID</string>
+    <string name="proj_sch">Project Schedule</string>
+    <string name="proj_lc_cost">Project Lifecycle Cost</string>
+
+    <string name="uniq_invmt_id">Unique Investment ID</string>
+    <string name="cio_rating">CIO Rating</string>
+    <string name="num_projs">Number of Projects</string>
+    <string name="lc_cost">Lifecycle Cost</string>
+    <string name="contractors">Contractors</string>
+    <string name="contract_types">Contract Types</string>
+
+    <string name="cio_rating5">Low Risk</string>
+    <string name="cio_rating4">Moderately Low Risk</string>
+    <string name="cio_rating3">Medium Risk</string>
+    <string name="cio_rating2">Moderately High Risk</string>
+    <string name="cio_rating1">High Risk</string>
+
+    <string name="agc_code">Agency Code</string>
+    <string name="phone_nbr">Phone Number</string>
+    <string name="mail_addr">Mailing Address</string>
+
+    <string name="title_widget">SOTIP</string>
+    <string name="no_projects">There are no projects.</string>
+    <string name="widget_data_title">SOTIP: Completed Projects</string>
+
+</resources>

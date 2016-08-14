@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/agcHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/short_gap">
+
+        <ImageView
+            android:id="@+id/agcImg"
+            android:layout_width="@dimen/agc_logo_size"
+            android:layout_height="@dimen/agc_logo_size"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:src="@drawable/d026_nasa_80" />
+
+        <TextView
+            android:id="@+id/agcName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/agc_title_right_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/agc_title_right_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text=""
+            android:textSize="@dimen/heading_text_size"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/short_gap"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/half_margin"
+        android:paddingTop="@dimen/half_margin">
+
+        <TextView
+            android:id="@+id/titleLbl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="@string/invmt_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/subheading_text_size"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/costIndctr"
+                android:layout_width="@dimen/var_circle_size"
+                android:layout_height="@dimen/var_circle_size"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:src="@drawable/ic_money_white_12" />
+
+            <ImageView
+                android:id="@+id/schIndctr"
+                android:layout_width="@dimen/var_circle_size"
+                android:layout_height="@dimen/var_circle_size"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/short_gap"
+                android:layout_marginStart="@dimen/short_gap"
+                android:layout_toEndOf="@id/costIndctr"
+                android:layout_toRightOf="@id/costIndctr"
+                android:src="@drawable/ic_date_range_white_12" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/short_gap"
+                android:layout_marginStart="@dimen/short_gap"
+                android:layout_toEndOf="@id/schIndctr"
+                android:layout_toRightOf="@id/schIndctr"
+                android:text="@string/proj_name"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listVw"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/short_gap"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:id="@+id/emptyVw"
+            style="?android:textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:gravity="center"
+            android:text="@string/no_data_msg"
+            android:visibility="gone" />
+
+    </FrameLayout>
+</LinearLayout>

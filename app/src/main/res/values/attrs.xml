@@ -1,0 +1,17 @@
+<!--
+    The attributes for the PieChart custom view are taken from the custom-view sample project.
+-->
+<resources>
+    <declare-styleable name="PieChart">
+        <attr name="autoCenterPointerInSlice" format="boolean" />
+        <attr name="highlightStrength" format="float" />
+        <attr name="labelColor" format="color" />
+        <attr name="pieRotation" format="integer" />
+        <attr name="pointerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="BoxChart">
+        <attr name="labelColour" format="color" />
+        <attr name="labelSize" format="dimension" />
+    </declare-styleable>
+</resources>

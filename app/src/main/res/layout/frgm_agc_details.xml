@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/short_gap">
+
+        <TextView
+            android:id="@+id/agcName"
+            style="@style/content_title"
+            android:text="" />
+
+        <TextView
+            style="@style/content_heading"
+            android:text="@string/agc_code" />
+
+        <TextView
+            android:id="@+id/agcCode"
+            style="@style/content_item"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/ecName"
+            style="@style/content_heading"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/ecUrl"
+            style="@style/content_item"
+            android:text="" />
+
+        <TextView
+            style="@style/content_heading"
+            android:text="@string/phone_nbr" />
+
+        <TextView
+            android:id="@+id/phoneNbr"
+            style="@style/content_item"
+            android:text="" />
+
+        <TextView
+            style="@style/content_heading"
+            android:text="@string/mail_addr" />
+
+        <TextView
+            android:id="@+id/mailAddr"
+            style="@style/content_item"
+            android:text="" />
+
+        <RelativeLayout
+            android:id="@+id/map_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/map_height"
+            android:layout_margin="@dimen/short_gap" />
+
+    </LinearLayout>
+</ScrollView>

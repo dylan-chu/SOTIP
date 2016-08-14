@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="@string/explore_option">
+        <menu>
+            <item
+                android:id="@+id/projCostNavItem"
+                android:icon="@drawable/ic_money_black_24"
+                android:title="@string/cost_var" />
+            <item
+                android:id="@+id/projSchNavItem"
+                android:icon="@drawable/ic_date_range_black_24"
+                android:title="@string/sch_var" />
+        </menu>
+    </item>
+    <item android:title="@string/evaluate_option">
+        <menu>
+            <item
+                android:id="@+id/projPerfNavItem"
+                android:icon="@drawable/ic_hourglass_empty_black_24"
+                android:title="@string/perfCmpltdProjs" />
+            <item
+                android:id="@+id/projRiskNavItem"
+                android:icon="@drawable/ic_hourglass_full_black_24"
+                android:title="@string/perfInProgProjs" />
+        </menu>
+    </item>
+    <item android:title="@string/analyze_option">
+        <menu>
+            <item
+                android:id="@+id/pmExpLvlNavItem"
+                android:icon="@drawable/ic_work_black_24"
+                android:title="@string/pm_exp_lvl_option" />
+            <item
+                android:id="@+id/sdlcMtdlgyNavItem"
+                android:icon="@drawable/ic_build_black_24"
+                android:title="@string/sdlc_method_option" />
+        </menu>
+    </item>
+</menu>

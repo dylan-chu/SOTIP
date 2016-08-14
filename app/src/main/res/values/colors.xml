@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryLight">#7986cb</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <color name="seafoam">#ffc6f9e5</color>
+    <color name="chartreuse">#ffb6e9b5</color>
+    <color name="emerald">#ffa6d9b5</color>
+    <color name="bluegrass">#ff96c9b5</color>
+    <color name="turquoise">#ff86b9b5</color>
+    <color name="slate">#ff76a9b5</color>
+
+    <color name="material_red_900">#b71c1c</color>
+    <color name="material_red_800">#c62828</color>
+    <color name="material_red_700">#d32f2f</color>
+    <color name="material_red_600">#e53935</color>
+    <color name="material_red">#f44336</color>
+    <color name="material_red_400">#ef5350</color>
+    <color name="material_red_300">#e57373</color>
+    <color name="material_red_200">#ef9a9a</color>
+    <color name="material_orange">#ff9800</color>
+    <color name="material_amber">#ffc107</color>
+    <color name="material_yellow">#ffeb3b</color>
+    <color name="material_yellow_300">#fff176</color>
+    <color name="material_yellow_200">#fff59d</color>
+    <color name="material_blue">#2196f3</color>
+    <color name="material_green_900">#1b5e20</color>
+    <color name="material_green_800">#2e7d32</color>
+    <color name="material_green_700">#388e3c</color>
+    <color name="material_green_600">#43a047</color>
+    <color name="material_green">#4caf50</color>
+    <color name="material_green_400">#66bb6a</color>
+    <color name="material_green_300">#81c784</color>
+    <color name="material_green_200">#a5d6a7</color>
+</resources>

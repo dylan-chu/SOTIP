@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/frgm_vert_gap"
+        android:paddingTop="@dimen/frgm_vert_gap"
+        tools:context=".ui.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:text="@string/cost_var"
+            android:textSize="@dimen/heading_text_size"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/totalProjs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/content_gap"
+            android:text=""
+            android:textSize="@dimen/subheading_text_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/short_gap"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:id="@+id/varBox5"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sm_box_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/quarter_margin"
+                    android:layout_marginEnd="@dimen/quarter_margin"
+                    android:layout_marginRight="@dimen/quarter_margin"
+                    android:background="@drawable/dark_red_rect"
+                    android:contentDescription="@string/cost_var_lvl5">
+
+                    <TextView
+                        android:id="@+id/percNdx5"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/sm_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc5"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/sm_box_margin"
+                        android:text="@string/gt_30" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc5"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/sm_box_txt_margin"
+                        android:text="@string/over_budget" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/varBox4"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/med_box_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/varBox5"
+                    android:layout_marginBottom="@dimen/quarter_margin"
+                    android:layout_marginEnd="@dimen/quarter_margin"
+                    android:layout_marginRight="@dimen/quarter_margin"
+                    android:layout_marginTop="@dimen/quarter_margin"
+                    android:background="@drawable/red_rect"
+                    android:contentDescription="@string/cost_var_lvl4">
+
+                    <TextView
+                        android:id="@+id/percNdx4"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/med_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc4"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/med_box_margin"
+                        android:text="@string/lt_30" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc4"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/med_box_txt_margin"
+                        android:text="@string/over_budget" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/varBox3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_box_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/varBox4"
+                    android:layout_marginEnd="@dimen/quarter_margin"
+                    android:layout_marginRight="@dimen/quarter_margin"
+                    android:layout_marginTop="@dimen/quarter_margin"
+                    android:background="@drawable/light_red_rect"
+                    android:contentDescription="@string/cost_var_lvl3">
+
+                    <TextView
+                        android:id="@+id/percNdx3"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/big_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc3"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/big_box_margin"
+                        android:text="@string/lt_10" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc3"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/big_box_txt_margin"
+                        android:text="@string/over_budget" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:id="@+id/varBox2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/big_box_size"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="@dimen/quarter_margin"
+                    android:layout_marginLeft="@dimen/quarter_margin"
+                    android:layout_marginStart="@dimen/quarter_margin"
+                    android:background="@drawable/light_green_rect"
+                    android:contentDescription="@string/cost_var_lvl2">
+
+                    <TextView
+                        android:id="@+id/percNdx2"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/big_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc2"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/big_box_margin"
+                        android:text="@string/gt_0" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc2"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/big_box_txt_margin"
+                        android:text="@string/under_budget" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/varBox1"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/sm_box_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/varBox2"
+                    android:layout_marginBottom="@dimen/quarter_margin"
+                    android:layout_marginLeft="@dimen/quarter_margin"
+                    android:layout_marginStart="@dimen/quarter_margin"
+                    android:layout_marginTop="@dimen/quarter_margin"
+                    android:background="@drawable/green_rect"
+                    android:contentDescription="@string/cost_var_lvl1">
+
+                    <TextView
+                        android:id="@+id/percNdx1"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/sm_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc1"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/sm_box_margin"
+                        android:text="@string/lt_30" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc1"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/sm_box_txt_margin"
+                        android:text="@string/under_budget" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/varBox0"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/med_box_size"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_below="@id/varBox1"
+                    android:layout_marginLeft="@dimen/quarter_margin"
+                    android:layout_marginStart="@dimen/quarter_margin"
+                    android:layout_marginTop="@dimen/quarter_margin"
+                    android:background="@drawable/dark_green_rect"
+                    android:contentDescription="@string/cost_var_lvl0">
+
+                    <TextView
+                        android:id="@+id/percNdx0"
+                        style="@style/perc_amt"
+                        android:layout_marginTop="@dimen/med_box_margin"
+                        android:text="" />
+
+                    <TextView
+                        android:id="@+id/costVarPerc0"
+                        style="@style/var_range_desc"
+                        android:layout_marginBottom="@dimen/med_box_margin"
+                        android:text="@string/gt_30" />
+
+                    <TextView
+                        android:id="@+id/costVarDesc0"
+                        style="@style/var_desc"
+                        android:layout_marginBottom="@dimen/med_box_txt_margin"
+                        android:text="@string/under_budget" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

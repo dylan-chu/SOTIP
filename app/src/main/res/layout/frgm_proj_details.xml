@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/short_gap">
+
+        <TextView
+            android:id="@+id/projName"
+            style="@style/content_title"
+            android:text="" />
+
+        <TextView
+            android:id="@+id/projIdLbl"
+            style="@style/content_heading"
+            android:text="@string/proj_id" />
+
+        <TextView
+            android:id="@+id/projId"
+            style="@style/content_item"
+            android:text="" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/short_gap">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/short_gap"
+                android:layout_marginStart="@dimen/short_gap"
+                android:text="@string/proj_sch"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <ImageView
+                android:id="@+id/schVar"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/short_gap"
+                android:layout_marginRight="@dimen/short_gap"
+                android:src="@drawable/green_800_circle_12" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/projDates"
+            style="@style/content_item"
+            android:text="" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/short_gap">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/short_gap"
+                android:layout_marginStart="@dimen/short_gap"
+                android:text="@string/proj_lc_cost"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <ImageView
+                android:id="@+id/costVar"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/short_gap"
+                android:layout_marginRight="@dimen/short_gap"
+                android:src="@drawable/green_800_circle_12" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/projCost"
+            style="@style/content_item"
+            android:text="" />
+
+        <TextView
+            style="@style/content_heading"
+            android:text="@string/pm_exp_lvl" />
+
+        <TextView
+            android:id="@+id/pmExpLvl"
+            style="@style/content_item"
+            android:text="" />
+
+        <TextView
+            style="@style/content_heading"
+            android:text="@string/sdlc_method" />
+
+        <TextView
+            android:id="@+id/sdlcMethod"
+            style="@style/content_item"
+            android:text="" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="@dimen/short_gap"
+            android:layout_marginLeft="@dimen/short_gap"
+            android:layout_marginRight="@dimen/short_gap"
+            android:layout_marginStart="@dimen/short_gap"
+            android:layout_marginTop="@dimen/short_gap"
+            android:background="@color/colorPrimaryDark" />
+
+        <TextView
+            android:id="@+id/projObjs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/short_gap"
+            android:layout_marginLeft="@dimen/short_gap"
+            android:layout_marginRight="@dimen/short_gap"
+            android:layout_marginStart="@dimen/short_gap"
+            android:layout_marginTop="@dimen/short_gap"
+            android:text="" />
+
+    </LinearLayout>
+
+</ScrollView>

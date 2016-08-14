@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="ga_trackingId"></string>
+    <bool name="ga_autoActivityTracking">false</bool>
+    <screenName name="info.circlespace.sotip.ui.CostVarFragment">Cost Variance</screenName>
+    <screenName name="info.circlespace.sotip.ui.SchVarFragment">Schedule Variance</screenName>
+    <screenName name="info.circlespace.sotip.ui.CmpltdProjPerfFragment">Completed Projects
+        Performance
+    </screenName>
+    <screenName name="info.circlespace.sotip.ui.InProgProjPerfFragment">In-Progress Projects
+        Performance
+    </screenName>
+    <screenName name="info.circlespace.sotip.ui.PmExpLvlFragment">PM Experience Level</screenName>
+    <screenName name="info.circlespace.sotip.ui.SdlcMethodFragment">SDLC Methodology</screenName>
+</resources>

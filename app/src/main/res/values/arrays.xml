@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pm_exp_lvls">
+        <item>@string/pm_exp_lvl1</item>
+        <item>@string/pm_exp_lvl2</item>
+        <item>@string/pm_exp_lvl3</item>
+        <item>@string/pm_exp_lvl4</item>
+        <item>@string/pm_exp_lvl5</item>
+        <item>@string/pm_exp_lvl6</item>
+        <item>@string/pm_exp_lvl7</item>
+        <item>@string/pm_exp_lvl8</item>
+        <item>@string/pm_exp_lvl9</item>
+    </string-array>
+
+    <string-array name="sdlc_methods">
+        <item>@string/sdlc_method1</item>
+        <item>@string/sdlc_method2</item>
+        <item>@string/sdlc_method3</item>
+        <item>@string/sdlc_method4</item>
+        <item>@string/sdlc_method5</item>
+        <item>@string/sdlc_method6</item>
+        <item>@string/sdlc_method7</item>
+        <item>@string/sdlc_method8</item>
+    </string-array>
+
+    <string-array name="perf_descs">
+        <item>@string/well_under_est</item>
+        <item>@string/within_est</item>
+        <item>@string/slightly_above_est</item>
+        <item>@string/above_est</item>
+        <item>@string/well_above_est</item>
+    </string-array>
+
+    <string-array name="cio_ratings">
+        <item>@string/cio_rating1</item>
+        <item>@string/cio_rating2</item>
+        <item>@string/cio_rating3</item>
+        <item>@string/cio_rating4</item>
+        <item>@string/cio_rating5</item>
+    </string-array>
+
+    <string-array name="chart_names">
+        <item>@string/cost_var</item>
+        <item>@string/sch_var</item>
+        <item>@string/perfCmpltdProjs</item>
+        <item>@string/perfInProgProjs</item>
+        <item>@string/pm_exp_lvl</item>
+        <item>@string/sdlc_method</item>
+    </string-array>
+</resources>
