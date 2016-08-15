@@ -393,7 +393,7 @@ public class SotipApp extends Application {
         }
 
         //return R.drawable.d000_unknown;
-        return R.drawable.d005_usda_40;
+        return R.drawable.d005_usda_80;
     }
 
 
