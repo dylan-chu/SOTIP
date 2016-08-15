@@ -36,9 +36,12 @@ import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract;
 import info.circlespace.sotip.data.SotipContract.AgencyEntry;
 import info.circlespace.sotip.sync.DataSyncAdptr;
-import info.circlespace.sotip.ui.MainActivity;
 
-
+/**
+ * This class contains a number of helper functions.
+ *
+ * todo: refactor into multiple classes
+ */
 public class SotipApp extends Application {
 
     public static final String IS_INITD_KEY = "is.initd";
@@ -65,7 +68,6 @@ public class SotipApp extends Application {
 
     public static int SCREEN_WIDTH = 0;
     public static int SCREEN_HEIGHT = 0;
-    public static float SCREEN_DENSITY = 0.0f;
     public static int LOCKED_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     public static final int TABLET_DP = 600;
 
@@ -476,21 +478,22 @@ public class SotipApp extends Application {
 
 
     public static boolean isInitd(Context ctx) {
-        if (SotipApp.IS_INITD)
+        if (IS_INITD) {
             return true;
+        }
 
-        if (!SotipApp.IS_LOADING) {
+        if (!isConnected(ctx)) {
+            Resources res = ctx.getResources();
+            showStatusMsg( res.getString(R.string.conn_internet_msg) );
+            return false;
+        }
+
+        if (!IS_LOADING) {
             DataSyncAdptr.syncImmediately(ctx);
         }
 
-        Resources res = ctx.getResources();
-        String msg = LOAD_MSG;
+        showStatusMsg(LOAD_MSG);
 
-        if (!SotipApp.isConnected(ctx)) {
-            msg = res.getString(R.string.conn_internet_msg);
-        }
-
-        showStatusMsg(msg);
         return false;
     }
 
@@ -506,8 +509,9 @@ public class SotipApp extends Application {
 
 
     public static void showStatusMsg(String msg) {
-        if (mCoordinator == null)
+        if (mCoordinator == null) {
             return;
+        }
 
         Snackbar snackbar = Snackbar.make(mCoordinator, msg, Snackbar.LENGTH_LONG);
         snackbar.show();
