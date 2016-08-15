@@ -104,11 +104,12 @@ public class BoxChart extends View {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        int w = MeasureSpec.getSize(widthMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int w = getMeasuredWidth();
 
         // set the height to be 2/3 of the width
-        int minh = 2 / 3 * w;
-        int h = minh;
+        int h = (int) (2f/3 * w);
 
         mWidth = w;
         mHeight = h;

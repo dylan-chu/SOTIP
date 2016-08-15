@@ -16,6 +16,8 @@
     <string name="init_msg">Initializing app</string>
     <string name="conn_internet_msg">Please connect to the Internet to initializd this app.</string>
     <string name="no_data_msg">No data available</string>
+    <string name="null_api_response_msg">Server returned unusable data.</string>
+    <string name="api_call_error_msg">Cannot connect to the server to download data.</string>
 
     <string name="cost_var">Cost Variance</string>
     <string name="sch_var">Schedule Variance</string>

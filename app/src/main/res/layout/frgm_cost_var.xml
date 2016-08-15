@@ -58,6 +58,11 @@
                     android:layout_marginBottom="@dimen/quarter_margin"
                     android:layout_marginEnd="@dimen/quarter_margin"
                     android:layout_marginRight="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox4"
+                    android:nextFocusUp="@+id/varBox0"
+                    android:nextFocusDown="@+id/varBox4"
+                    android:nextFocusRight="@+id/varBox2"
                     android:background="@drawable/dark_red_rect"
                     android:contentDescription="@string/cost_var_lvl5">
 
@@ -91,6 +96,11 @@
                     android:layout_marginEnd="@dimen/quarter_margin"
                     android:layout_marginRight="@dimen/quarter_margin"
                     android:layout_marginTop="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox3"
+                    android:nextFocusUp="@+id/varBox5"
+                    android:nextFocusDown="@+id/varBox3"
+                    android:nextFocusRight="@+id/varBox1"
                     android:background="@drawable/red_rect"
                     android:contentDescription="@string/cost_var_lvl4">
 
@@ -123,6 +133,11 @@
                     android:layout_marginEnd="@dimen/quarter_margin"
                     android:layout_marginRight="@dimen/quarter_margin"
                     android:layout_marginTop="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox2"
+                    android:nextFocusUp="@+id/varBox4"
+                    android:nextFocusDown="@+id/varBox2"
+                    android:nextFocusRight="@+id/varBox0"
                     android:background="@drawable/light_red_rect"
                     android:contentDescription="@string/cost_var_lvl3">
 
@@ -160,6 +175,11 @@
                     android:layout_marginBottom="@dimen/quarter_margin"
                     android:layout_marginLeft="@dimen/quarter_margin"
                     android:layout_marginStart="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox1"
+                    android:nextFocusUp="@+id/varBox3"
+                    android:nextFocusDown="@+id/varBox1"
+                    android:nextFocusLeft="@+id/varBox5"
                     android:background="@drawable/light_green_rect"
                     android:contentDescription="@string/cost_var_lvl2">
 
@@ -193,6 +213,11 @@
                     android:layout_marginLeft="@dimen/quarter_margin"
                     android:layout_marginStart="@dimen/quarter_margin"
                     android:layout_marginTop="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox0"
+                    android:nextFocusUp="@+id/varBox2"
+                    android:nextFocusDown="@+id/varBox0"
+                    android:nextFocusLeft="@+id/varBox4"
                     android:background="@drawable/green_rect"
                     android:contentDescription="@string/cost_var_lvl1">
 
@@ -225,6 +250,11 @@
                     android:layout_marginLeft="@dimen/quarter_margin"
                     android:layout_marginStart="@dimen/quarter_margin"
                     android:layout_marginTop="@dimen/quarter_margin"
+                    android:focusable="true"
+                    android:nextFocusForward="@+id/varBox5"
+                    android:nextFocusUp="@+id/varBox1"
+                    android:nextFocusDown="@+id/varBox5"
+                    android:nextFocusLeft="@+id/varBox3"
                     android:background="@drawable/dark_green_rect"
                     android:contentDescription="@string/cost_var_lvl0">
 

@@ -295,27 +295,15 @@ public class PieChart extends ViewGroup {
     }
 
 
-    //
-    // Measurement functions. This example uses a simple heuristic: it assumes that
-    // the pie chart should be at least as wide as its label.
-    //
-    @Override
-    protected int getSuggestedMinimumWidth() {
-        return 0;
-    }
-
-    @Override
-    protected int getSuggestedMinimumHeight() {
-        return 0;
-    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        int w = MeasureSpec.getSize(widthMeasureSpec);
+        int w = getMeasuredWidth();
 
         // set the height to be 5/12 of the width
-        int h = 5*12/w;
+        int h = (int)(5f/12 * w);
 
         setMeasuredDimension(w, h);
     }

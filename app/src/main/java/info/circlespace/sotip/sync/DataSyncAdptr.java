@@ -71,6 +71,8 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
     @Override
     public void onPerformSync(Account account, Bundle extras, String authority, ContentProviderClient provider, SyncResult syncResult) {
 
+        SotipApp.startLoading();
+
         /**
          * The default before a call times out is 10 seconds .
          * This is not enough time to get the data from the backend.
@@ -107,6 +109,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
             public void onResponse(Call<ChartDataApiRes> call, Response<ChartDataApiRes> response) {
                 ChartDataApiRes apiRes = response.body();
                 if (apiRes == null) {
+                    SotipApp.stopLoading(SotipApp.API_DATA_ERR);
                     return;
                 }
 
@@ -128,12 +131,13 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
                 }
 
                 // we have completed pulling data from 1 out of 4 API endpoints
-                SotipApp.INIT_PERC = 25;
+                SotipApp.updateLoadingPerc(0.25);
                 getProjectsData(retro);
             }
 
             @Override
             public void onFailure(Call<ChartDataApiRes> call, Throwable t) {
+                SotipApp.stopLoading(SotipApp.API_CALL_ERR);
             }
         });
     }
@@ -158,6 +162,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
             public void onResponse(Call<ProjectsApiRes> call, Response<ProjectsApiRes> response) {
                 ProjectsApiRes apiRes = response.body();
                 if (apiRes == null) {
+                    SotipApp.stopLoading(SotipApp.API_DATA_ERR);
                     return;
                 }
 
@@ -178,12 +183,13 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
                 }
 
                 // we have completed pulling data from 2 out of 4 API endpoints
-                SotipApp.INIT_PERC = 50;
+                SotipApp.updateLoadingPerc(0.50);
                 getInvestmentsData(retro);
             }
 
             @Override
             public void onFailure(Call<ProjectsApiRes> call, Throwable t) {
+                SotipApp.stopLoading(SotipApp.API_CALL_ERR);
             }
         });
     }
@@ -225,6 +231,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
             public void onResponse(Call<InvestmentsApiRes> call, Response<InvestmentsApiRes> response) {
                 InvestmentsApiRes apiRes = response.body();
                 if (apiRes == null) {
+                    SotipApp.stopLoading(SotipApp.API_DATA_ERR);
                     return;
                 }
 
@@ -245,12 +252,13 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
                 }
 
                 // we have completed pulling data from 3 out of 4 API endpoints
-                SotipApp.INIT_PERC = 75;
+                SotipApp.updateLoadingPerc(0.75);
                 getAgenciesData(retro);
             }
 
             @Override
             public void onFailure(Call<InvestmentsApiRes> call, Throwable t) {
+                SotipApp.stopLoading(SotipApp.API_CALL_ERR);
             }
         });
     }
@@ -282,6 +290,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
             public void onResponse(Call<AgenciesApiRes> call, Response<AgenciesApiRes> response) {
                 AgenciesApiRes apiRes = response.body();
                 if (apiRes == null) {
+                    SotipApp.stopLoading(SotipApp.API_DATA_ERR);
                     return;
                 }
 
@@ -302,21 +311,14 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
                 }
 
                 // we have completed pulling data from all API endpoints
-                SotipApp.INIT_PERC = 100;
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString(SotipApp.UPD_DATE_KEY, mToday);
-                editor.putBoolean(SotipApp.IS_INITD_KEY, true);
-                editor.commit();
-
-                SotipApp.IS_INITD = true;
-                SotipApp.addAgencies(items);
+                SotipApp.completeLoading(getContext(), mToday, items);
 
                 updateWidgets();
             }
 
             @Override
             public void onFailure(Call<AgenciesApiRes> call, Throwable t) {
+                SotipApp.stopLoading(SotipApp.API_CALL_ERR);
             }
         });
     }

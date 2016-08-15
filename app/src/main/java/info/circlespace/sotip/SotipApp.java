@@ -5,13 +5,18 @@ package info.circlespace.sotip;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Logger;
@@ -30,14 +35,24 @@ import info.circlespace.sotip.api.AgencyInfo;
 import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract;
 import info.circlespace.sotip.data.SotipContract.AgencyEntry;
+import info.circlespace.sotip.sync.DataSyncAdptr;
+import info.circlespace.sotip.ui.MainActivity;
 
 
 public class SotipApp extends Application {
 
     public static final String IS_INITD_KEY = "is.initd";
     public static boolean IS_INITD = false;
-    public static int INIT_PERC = 0;
+    public static boolean IS_LOADING = false;
+    public static final int API_CALL_ERR = 100;
+    public static final int API_DATA_ERR = 200;
     public static CoordinatorLayout mCoordinator;
+    public static Handler mMainHandler;
+    public static ProgressBar mLoadingIndic;
+    public static String LOAD_MSG = "";
+    public static String INIT_MSG = "";
+    public static String API_CALL_ERR_MSG = "";
+    public static String API_DATA_ERR_MSG = "";
 
     public static boolean IS_DUAL_PANE = false;
 
@@ -52,7 +67,7 @@ public class SotipApp extends Application {
     public static int SCREEN_HEIGHT = 0;
     public static float SCREEN_DENSITY = 0.0f;
     public static int LOCKED_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-    public static final int TABLET_DP = 560;
+    public static final int TABLET_DP = 600;
 
     public static final String UPD_DATE_KEY = "upd.date";
     public static final String PARAM_DATE = "date";
@@ -149,6 +164,9 @@ public class SotipApp extends Application {
         PERC_FMTR.setMaximumFractionDigits(MAX_DECIMALS);
 
         Resources res = getResources();
+        INIT_MSG = res.getString( R.string.init_msg );
+        API_CALL_ERR_MSG = res.getString( R.string.api_call_error_msg );
+        API_DATA_ERR_MSG = res.getString( R.string.null_api_response_msg );
 
         PERF_COLOURS = new int[NUM_PERF_CATEGS];
         PERF_COLOURS[0] = res.getColor(R.color.material_green);
@@ -163,6 +181,68 @@ public class SotipApp extends Application {
         CIO_RATINGS = res.getStringArray(R.array.cio_ratings);
 
         CHART_NAMES = res.getStringArray(R.array.chart_names);
+    }
+
+
+    public static void showLoadingIndicator( final boolean shouldShow ) {
+        if ( mMainHandler == null )
+            return;
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (shouldShow) {
+                    mLoadingIndic.setVisibility(View.VISIBLE);
+                } else {
+                    mLoadingIndic.setVisibility(View.GONE);
+                }
+            }
+        };
+        mMainHandler.post(myRunnable);
+    }
+
+
+    public static void startLoading() {
+        IS_LOADING = true;
+        updateLoadingPerc(0);
+        showLoadingIndicator(true);
+    }
+
+
+    public static void updateLoadingPerc( double perc ) {
+        LOAD_MSG =  INIT_MSG + ": " + PERC_FMTR.format( perc );
+    }
+
+
+    public static void stopLoading( int errorCode ) {
+        IS_LOADING = false;
+        showLoadingIndicator(false);
+
+        switch (errorCode) {
+            case API_CALL_ERR:
+                LOAD_MSG = API_CALL_ERR_MSG;
+                break;
+            case API_DATA_ERR:
+                LOAD_MSG = API_DATA_ERR_MSG;
+                break;
+
+        }
+    }
+
+
+    public static void completeLoading( Context ctx, String loadDate, List<AgencyInfo> items ) {
+        IS_LOADING = false;
+        updateLoadingPerc( 1 );
+        showLoadingIndicator(false);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(UPD_DATE_KEY, loadDate);
+        editor.putBoolean(IS_INITD_KEY, true);
+        editor.commit();
+
+        IS_INITD = true;
+        addAgencies( items );
     }
 
 
@@ -399,8 +479,12 @@ public class SotipApp extends Application {
         if (SotipApp.IS_INITD)
             return true;
 
+        if (!SotipApp.IS_LOADING) {
+            DataSyncAdptr.syncImmediately(ctx);
+        }
+
         Resources res = ctx.getResources();
-        String msg = res.getString(R.string.init_msg) + " ... " + INIT_PERC + "%";
+        String msg = LOAD_MSG;
 
         if (!SotipApp.isConnected(ctx)) {
             msg = res.getString(R.string.conn_internet_msg);

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
@@ -21,6 +22,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import info.circlespace.sotip.R;
 import info.circlespace.sotip.SotipApp;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
     private CoordinatorLayout mCoordinator;
+    private ProgressBar mLoadingIndic;
+
     private boolean mIsDualPane;
     private Fragment mFrgm;
     private Fragment mFrgm2;
@@ -47,6 +52,11 @@ public class MainActivity extends AppCompatActivity
 
         mCoordinator = (CoordinatorLayout) findViewById(R.id.coordinator);
         SotipApp.mCoordinator = mCoordinator;
+
+        mLoadingIndic = (ProgressBar) findViewById(R.id.loadingIndic);
+        mLoadingIndic.setVisibility(View.GONE);
+        SotipApp.mMainHandler = new Handler(getMainLooper());
+        SotipApp.mLoadingIndic = mLoadingIndic;
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SotipApp.IS_INITD = prefs.getBoolean(SotipApp.IS_INITD_KEY, false);
@@ -249,4 +259,13 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+/*
+    public void showLoadingIndicator() {
+        mLoadingBar.setVisibility(View.VISIBLE);
+    }
+
+    public void removeLoadingIndicator() {
+        mLoadingBar.setVisibility(View.GONE);
+    }
+*/
 }
