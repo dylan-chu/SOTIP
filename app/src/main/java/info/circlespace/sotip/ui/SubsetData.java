@@ -3,7 +3,10 @@
  */
 package info.circlespace.sotip.ui;
 
-
+/**
+ * This class holds the data necessary to populate the grid showing
+ * the number of projects for each subset.
+ */
 public class SubsetData {
 
     private int mNdx;

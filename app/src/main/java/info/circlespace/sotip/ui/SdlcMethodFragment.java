@@ -31,7 +31,11 @@ import info.circlespace.sotip.data.SotipContract.ChartDataEntry;
 import info.circlespace.sotip.sync.GroupedDataSet;
 import info.circlespace.sotip.sync.PerformanceDataSet;
 
-
+/**
+ * Displays a breakdown of the number of projects for each SDLC methodology and when that
+ * subset is selected, displays the percentage of projects for each performance category for
+ * that subset.
+ */
 public class SdlcMethodFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = SdlcMethodFragment.class.getSimpleName();
@@ -70,12 +74,17 @@ public class SdlcMethodFragment extends Fragment implements LoaderManager.Loader
         mChart = (BoxChart) rootView.findViewById(R.id.boxChart);
         setupChart();
 
+        // checks whether the app has successfully loaded initial data from the server
         SotipApp.isInitd(getActivity());
 
         return rootView;
     }
 
 
+    /**
+     * Sets up the grid that shows the number of projects for each subset
+     * and display initial dummy data for it.
+     */
     private void setupList() {
         Resources res = getResources();
         mTotalProjs.setText(String.format(res.getString(R.string.a11y_total_projects), 0));
@@ -108,10 +117,15 @@ public class SdlcMethodFragment extends Fragment implements LoaderManager.Loader
     }
 
 
+    /**
+     * Sets up a click handler for the box chart and display initial dummy data for it.
+     */
     private void setupChart() {
         mChart.setOnItemSelectedListener(new BoxChart.OnItemSelectedListener() {
             @Override
             public void onItemSelected(int itemNdx) {
+                // prevent the app from showing a list of projects if the app has not
+                // successfully loaded data from the server at least once
                 if (!SotipApp.isInitd(getActivity())) {
                     return;
                 }
@@ -188,6 +202,9 @@ public class SdlcMethodFragment extends Fragment implements LoaderManager.Loader
     }
 
 
+    /**
+     * Sets the content for the grid of subsets.
+     */
     private void showListData() {
         int total = mDataSet.getTotal();
         Resources res = getResources();
@@ -203,6 +220,9 @@ public class SdlcMethodFragment extends Fragment implements LoaderManager.Loader
     }
 
 
+    /**
+     * Sets the content for the box chart.
+     */
     private void showSubsetInfo(int ndx) {
         SotipApp.SDM_GROUP_NDX = ndx;
 

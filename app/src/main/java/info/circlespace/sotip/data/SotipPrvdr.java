@@ -305,6 +305,7 @@ public class SotipPrvdr extends ContentProvider {
 
         int returnCount = 0;
 
+        //  Instead of a regular insert, we will use a replace command
         switch (match) {
             case PROJECTS:
                 db.beginTransaction();

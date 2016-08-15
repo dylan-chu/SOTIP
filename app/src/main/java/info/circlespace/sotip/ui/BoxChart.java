@@ -19,9 +19,14 @@ import info.circlespace.sotip.R;
 import info.circlespace.sotip.SotipApp;
 
 /**
- * Custom view that shows a rectangular chart-like representation of the performance of a group of IT projects
+ * Custom view that shows a rectangular chart-like representation of the performance of a group of IT projects.
+ *
+ * There are two rows in the chart.  The first row has 3 boxes and the second row has 2 boxes.
  */
 public class BoxChart extends View {
+    // the index of the first box in the second row.
+    public static final int SECOND_ROW = 3;
+
     private List<DataItem> mData = new ArrayList<DataItem>();
 
     private float mTotal = 0.0f;
@@ -108,13 +113,14 @@ public class BoxChart extends View {
 
         int w = getMeasuredWidth();
 
-        // set the height to be 2/3 of the width
+        // set the height to be 2/3 of the width (a number chosen arbitrarily)
         int h = (int) (2f/3 * w);
 
         mWidth = w;
         mHeight = h;
         setMeasuredDimension(w, h);
     }
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -142,7 +148,7 @@ public class BoxChart extends View {
     @Override
     public boolean onTouchEvent(MotionEvent evt) {
 
-        // check that the user stopped the motion
+        // check that the user stopped pressing
         if (evt.getAction() == MotionEvent.ACTION_UP) {
             float x = evt.getX();
             float y = evt.getY();
@@ -172,6 +178,7 @@ public class BoxChart extends View {
         public String mLabel;
         public int mColor;
 
+        // the corners of the box
         public float mStartX;
         public float mEndX;
         public float mStartY;
@@ -214,6 +221,9 @@ public class BoxChart extends View {
     }
 
 
+    /**
+     * Calculates the size of each box in the box chart.
+     */
     private void calcBoxSizes() {
         if (mData.size() != SotipApp.NUM_PERF_CATEGS)
             return;
@@ -230,13 +240,13 @@ public class BoxChart extends View {
         for (int i = 0; i < mData.size(); i++) {
             DataItem di = mData.get(i);
 
-            if (i == 3) {
+            if (i == SECOND_ROW) {
                 startX = 0;
                 startY = halfHeight;
                 endY += halfHeight;
             }
 
-            if (i < 3) {
+            if (i < SECOND_ROW) {
                 endX = startX + thirdWidth;
             } else {
                 endX = startX + halfWidth;

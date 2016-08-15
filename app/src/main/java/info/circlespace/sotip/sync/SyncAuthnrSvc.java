@@ -9,6 +9,8 @@ import android.os.IBinder;
 
 /**
  * This class implements a service to run the account authenticator required by the sync adapter.
+ *
+ * The code is derived from code in the Github repo for Udacity's Advanced Android Development course.
  */
 public class SyncAuthnrSvc extends Service {
 

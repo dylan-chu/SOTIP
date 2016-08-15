@@ -49,6 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:padding="10dp"
+                android:nextFocusForward="@+id/dataBox"
+                android:nextFocusDown="@+id/dataBox"
                 custom:autoCenterPointerInSlice="false"
                 custom:highlightStrength="1.12"
                 custom:labelColor="@android:color/black"
@@ -64,6 +66,8 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:nextFocusForward="@+id/pieChart"
+            android:nextFocusUp="@+id/pieChart"
             android:background="@drawable/black_box">
 
             <RelativeLayout

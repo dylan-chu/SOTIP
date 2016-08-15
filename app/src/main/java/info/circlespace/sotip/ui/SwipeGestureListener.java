@@ -6,7 +6,6 @@ package info.circlespace.sotip.ui;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 
-
 /**
  * This class listens for swipe gestures.
  *

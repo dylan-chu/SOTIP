@@ -20,7 +20,9 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract.InvestmentEntry;
 
-
+/**
+ * Displays the details for an IT investment.
+ */
 public class InvmtDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = InvmtDetailsFragment.class.getSimpleName();
@@ -89,7 +91,6 @@ public class InvmtDetailsFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-        //Uri uri = ProjectEntry.buildUniqueItemUri(SotipApp.PROJECT_ID);
         Uri uri = InvestmentEntry.buildUniqInvmtIdUri(SotipApp.INVESTMENT_ID);
 
         return new CursorLoader(getActivity(),
@@ -120,6 +121,7 @@ public class InvmtDetailsFragment extends Fragment implements LoaderManager.Load
         mContractTypes.setText(SotipApp.fmtConcatStr(data.getString(COL_CONTRACT_TYPES)));
         mSummary.setText(data.getString(COL_SUMMARY));
 
+        // calculate the number of projects and the total cost for the investment
         double totalCost = 0d;
 
         if (SotipApp.AGENCY_PROJS != null) {

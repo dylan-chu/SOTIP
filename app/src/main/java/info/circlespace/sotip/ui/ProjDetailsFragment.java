@@ -21,7 +21,9 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract.ProjectEntry;
 
-
+/**
+ * Displays the details for a project.
+ */
 public class ProjDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = ProjDetailsFragment.class.getSimpleName();
@@ -104,6 +106,8 @@ public class ProjDetailsFragment extends Fragment implements LoaderManager.Loade
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         Uri uri = ProjectEntry.CONTENT_URI;
 
+        // load all projects for an IT investment so we can sum up the number of projects
+        // in the investment as well as the lifecycle cost for it
         return new CursorLoader(getActivity(),
                 uri,
                 DATA_COLUMNS,
@@ -144,6 +148,7 @@ public class ProjDetailsFragment extends Fragment implements LoaderManager.Loade
             item.setSdm(data.getInt(COL_SDLC_METHOD));
             item.setOsdm(data.getString(COL_OTHER_SDM));
 
+            // determine whether it is the right project in the investment to display
             if (item.getID() == SotipApp.PROJECT_ID) {
                 showProjDetails(item);
             }

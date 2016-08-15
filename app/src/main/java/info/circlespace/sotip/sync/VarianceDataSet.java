@@ -6,7 +6,9 @@ package info.circlespace.sotip.sync;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class holds data for each variance category.
+ */
 public class VarianceDataSet implements SotipDataSet {
 
     public static final String CATEG_DELIMITER = "-";
@@ -14,9 +16,13 @@ public class VarianceDataSet implements SotipDataSet {
 
     public static final int NUM_CATEGORIES = 6;
 
+    // the number of projects in each variance category
     private int[] mDataSet;
+    // the percentage of the projects in each variance category
     private float[] mPercSet;
+    // the agencies which have projects in each variance category
     private List<String>[] mAgencies;
+
 
     public VarianceDataSet() {
         mDataSet = new int[NUM_CATEGORIES];
@@ -36,6 +42,9 @@ public class VarianceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns the number of projects for each variance category as a string
+     */
     @Override
     public String getDataAsStr() {
         StringBuffer buf = new StringBuffer();
@@ -50,6 +59,9 @@ public class VarianceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses a string which contains the number of projects in each variance category
+     */
     @Override
     public void addData(String dataStr) {
         String[] dataItems = dataStr.split(DELIMITER);
@@ -70,16 +82,21 @@ public class VarianceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Calculates the percent of projects for each variance category based on the number of projects for each category.
+     */
     private void calcPercs() {
         float total = (float) getTotal();
 
         for (int i = 0; i < NUM_CATEGORIES; i++) {
             mPercSet[i] = mDataSet[i] / total;
         }
-
     }
 
 
+    /**
+     * Returns the total number of projects for all variance categories.
+     */
     @Override
     public int getTotal() {
         int total = 0;
@@ -92,13 +109,17 @@ public class VarianceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses a string which contains a list of agency codes for each variance category.
+     */
     @Override
     public void addAgencies(String agenciesStr) {
         String[] agenciesItems = agenciesStr.split(CATEG_DELIMITER);
 
         for (int i = 0; i < NUM_CATEGORIES; i++) {
             String agcList = agenciesItems[i];
-            String[] agcs = agcList.split(",");
+            String[] agcs = agcList.split( DELIMITER);
+
             for (int j = 0; j < agcs.length; j++) {
                 mAgencies[i].add(agcs[j]);
             }
@@ -106,6 +127,9 @@ public class VarianceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns a list of agencies for a variance category.
+     */
     public List<String> getAgencies(int ndx) {
         return mAgencies[ndx];
     }

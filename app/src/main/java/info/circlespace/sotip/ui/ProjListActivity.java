@@ -21,7 +21,9 @@ import info.circlespace.sotip.R;
 import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.api.ProjectInfo;
 
-
+/**
+ * Displays and manages the list of projects.
+ */
 public class ProjListActivity extends AppCompatActivity implements ProjListFragment.FragmentListener {
 
     public static final String LOG_TAG = ProjListActivity.class.getSimpleName();
@@ -46,6 +48,7 @@ public class ProjListActivity extends AppCompatActivity implements ProjListFragm
             supportActionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        // locks the screen configuration
         setRequestedOrientation(SotipApp.LOCKED_ORIENTATION);
 
         mListFrgm = (ProjListFragment) getSupportFragmentManager().findFragmentById(R.id.listFrgm);
@@ -113,6 +116,7 @@ public class ProjListActivity extends AppCompatActivity implements ProjListFragm
         if (SotipApp.IS_DUAL_PANE) {
             mVwPager.setCurrentItem(0);
 
+            // when a next item is selected, display the project details
             mProjDetailsFrgm.showDetails();
 
             if (mInvmtDetailsFrgm.isVisible())

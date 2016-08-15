@@ -48,7 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * This class implements a sync adapter to periodically retrieve data from the backend.
- * <p/>
+ *
  * The code in this class is based on code in Udacity's Advanced Android Development course's Github repo.
  */
 public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
@@ -92,14 +92,19 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
         Calendar now = GregorianCalendar.getInstance();
         mToday = SotipApp.fmtDate(now.getTime());
 
+        // need to pass the date of the last update to all API calls
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         mDataUpdDate = prefs.getString(SotipApp.UPD_DATE_KEY, SotipApp.DEFAULT_DATE);
 
-        // first retrieve the data for charts
+        // first retrieve updated data for charts
         getChartData(retro);
     }
 
 
+    /**
+     * Makes an API call to retrieve data that can be used to populate the charts.  The server derives this data from
+     * the projects it stores.
+     */
     public void getChartData(final Retrofit retro) {
         ItDashboardApiSvc.ChartsApi dataSvc = retro.create(ItDashboardApiSvc.ChartsApi.class);
         Call<ChartDataApiRes> call = dataSvc.getData(mDataUpdDate);
@@ -131,6 +136,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
                 }
 
                 // we have completed pulling data from 1 out of 4 API endpoints
+                // now retrieve updated data for projects
                 SotipApp.updateLoadingPerc(0.25);
                 getProjectsData(retro);
             }
@@ -153,6 +159,9 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
     }
 
 
+    /**
+     * Makes an API call to get updated data for IT projects.
+     */
     public void getProjectsData(final Retrofit retro) {
         ItDashboardApiSvc.ProjectsApi dataSvc = retro.create(ItDashboardApiSvc.ProjectsApi.class);
         Call<ProjectsApiRes> call = dataSvc.getData(mDataUpdDate);
@@ -184,6 +193,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
 
                 // we have completed pulling data from 2 out of 4 API endpoints
                 SotipApp.updateLoadingPerc(0.50);
+                // now retrieve updated data for investments
                 getInvestmentsData(retro);
             }
 
@@ -222,6 +232,10 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
     }
 
 
+    /**
+     * Makes an API call to retrieve updated data for IT investments.  The server aggregates data from three data feeds
+     * from IT Dashboard to supply this data.
+     */
     public void getInvestmentsData(final Retrofit retro) {
         ItDashboardApiSvc.InvestmentsApi dataSvc = retro.create(ItDashboardApiSvc.InvestmentsApi.class);
         Call<InvestmentsApiRes> call = dataSvc.getData(mDataUpdDate);
@@ -253,6 +267,7 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
 
                 // we have completed pulling data from 3 out of 4 API endpoints
                 SotipApp.updateLoadingPerc(0.75);
+                // now retrieve updated data for agencies
                 getAgenciesData(retro);
             }
 
@@ -281,6 +296,9 @@ public class DataSyncAdptr extends AbstractThreadedSyncAdapter {
     }
 
 
+    /**
+     * Makes an API call to retrieve updated data for agencies.
+     */
     public void getAgenciesData(final Retrofit retro) {
         ItDashboardApiSvc.AgenciesApi dataSvc = retro.create(ItDashboardApiSvc.AgenciesApi.class);
         Call<AgenciesApiRes> call = dataSvc.getData(mDataUpdDate);

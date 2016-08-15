@@ -12,7 +12,11 @@ import android.support.annotation.NonNull;
 
 import info.circlespace.sotip.sync.DataSyncAdptr;
 
-
+/**
+ * This class helps to implement the widget.
+ *
+ * The code in this class is based on code in Udacity's Advanced Android Development course's Github repo.
+ */
 public class ProjPerfWidget extends AppWidgetProvider {
 
     @Override
@@ -33,6 +37,5 @@ public class ProjPerfWidget extends AppWidgetProvider {
         if (DataSyncAdptr.ACTION_DATA_UPDATED.equals(intent.getAction())) {
             context.startService(new Intent(context, ProjPerfIntentSvc.class));
         }
-
     }
 }

@@ -25,7 +25,9 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.data.SotipContract.ChartDataEntry;
 import info.circlespace.sotip.sync.PerformanceDataSet;
 
-
+/**
+ * Displays a breakdown of the percentage of projects in each performance category for in-progress projects.
+ */
 public class InProgProjPerfFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
 
     public static final String LOG_TAG = InProgProjPerfFragment.class.getSimpleName();
@@ -70,16 +72,15 @@ public class InProgProjPerfFragment extends Fragment implements LoaderManager.Lo
     }
 
 
+    /**
+     * Sets up a click handler for the chart and display initial dummy data for it.
+     */
     private void setupChart() {
-        final Resources res = getResources();
-        mTotalProjs.setText(String.format(res.getString(R.string.a11y_total_projects), 0));
-        mPercOfProjs.setText(SotipApp.fmtPerc(0.0f));
-
-        mChart.addItem(DEFAULT_CHART_VALUE, getResources().getColor(R.color.black));
-
         mChart.setOnCurrentItemChangedListener(new PieChart.OnCurrentItemChangedListener() {
             @Override
             public void onCurrentItemChanged(PieChart chart, int itemNdx) {
+                // prevent the chart from transferring data to the data box
+                // if the app has not successfully loaded data from the server at least once
                 if (!SotipApp.isInitd(getActivity())) {
                     return;
                 }
@@ -89,11 +90,19 @@ public class InProgProjPerfFragment extends Fragment implements LoaderManager.Lo
                 mDataBox.setBackground(getResources().getDrawable(SotipApp.getPerfDrawable(itemNdx)));
             }
         });
+
+        final Resources res = getResources();
+        mTotalProjs.setText(String.format(res.getString(R.string.a11y_total_projects), 0));
+        mPercOfProjs.setText(SotipApp.fmtPerc(0.0f));
+
+        mChart.addItem(DEFAULT_CHART_VALUE, getResources().getColor(R.color.black));
     }
 
 
     @Override
     public void onClick(View vw) {
+        // prevent the app from showing a list of projects if the app has not
+        // successfully loaded data from the server at least once
         if (!SotipApp.isInitd(getActivity())) {
             return;
         }
@@ -127,7 +136,6 @@ public class InProgProjPerfFragment extends Fragment implements LoaderManager.Lo
 
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
-
         Uri chartUri = ChartDataEntry.CONTENT_URI;
 
         return new CursorLoader(getActivity(),
@@ -162,6 +170,9 @@ public class InProgProjPerfFragment extends Fragment implements LoaderManager.Lo
     }
 
 
+    /**
+     * Sets the content for the chart.
+     */
     private void showChartData() {
         int total = mDataSet.getTotal();
 

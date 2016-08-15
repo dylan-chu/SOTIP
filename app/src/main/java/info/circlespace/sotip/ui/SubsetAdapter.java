@@ -16,7 +16,9 @@ import java.util.List;
 
 import info.circlespace.sotip.R;
 
-
+/**
+ * An adapter for the grid showing the number of projects for each subset.
+ */
 public class SubsetAdapter extends RecyclerView.Adapter<SubsetAdapter.VwHldr> {
 
     public static final String LOG_TAG = SubsetAdapter.class.getSimpleName();
@@ -48,9 +50,13 @@ public class SubsetAdapter extends RecyclerView.Adapter<SubsetAdapter.VwHldr> {
             if (mSelectedItemNdx < 0) {
                 return;
             }
+
+            // change the background of the previously clicked item back to normal
             if (mClickedContainer != null) {
                 mClickedContainer.setBackgroundDrawable(mCtx.getResources().getDrawable(R.drawable.primary_box));
             }
+
+            // highlight the currently clicked item
             container.setBackgroundDrawable(mCtx.getResources().getDrawable(R.drawable.primary_light_box));
             mClickedContainer = container;
 

@@ -25,7 +25,8 @@ import info.circlespace.sotip.R;
 /**
  * Custom view that shows a pie chart and, optionally, a label.
  *
- * The code in this class comes mostly from the PieChart class in the custom-view sample project.
+ * Most of the code (and comments) in this class comes from the PieChart class
+ * from the sample project for custom views.
  */
 public class PieChart extends ViewGroup {
     private List<Item> mData = new ArrayList<Item>();
@@ -302,7 +303,7 @@ public class PieChart extends ViewGroup {
 
         int w = getMeasuredWidth();
 
-        // set the height to be 5/12 of the width
+        // set the height to be 5/12 of the width (a number chosen arbitrarily)
         int h = (int)(5f/12 * w);
 
         setMeasuredDimension(w, h);

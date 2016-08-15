@@ -3,14 +3,18 @@
  */
 package info.circlespace.sotip.sync;
 
-
+/**
+ * This class holds data for each performance category for a bunch of subsets.
+ */
 public class GroupedDataSet implements SotipDataSet {
 
     public static final String CATEG_DELIMITER = ":";
     public static final String DELIMITER = "-";
 
     private int mNumSubsets;
+    // each subset has data for each performance category
     private PerformanceDataSet[] mDataSets;
+
 
     public GroupedDataSet(int numSubsets) {
         mNumSubsets = numSubsets;
@@ -26,6 +30,9 @@ public class GroupedDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns the number of projects in each performance category for each subset.
+     */
     @Override
     public String getDataAsStr() {
         StringBuffer buf = new StringBuffer();
@@ -40,6 +47,9 @@ public class GroupedDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses the number of projects in each performance category for each subset.
+     */
     @Override
     public void addData(String dataStr) {
         String[] dataSets = dataStr.split(DELIMITER);
@@ -50,6 +60,9 @@ public class GroupedDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns the total number of projects.
+     */
     @Override
     public int getTotal() {
         int total = 0;
@@ -67,6 +80,9 @@ public class GroupedDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses the agencies associated with each performance category for each subset.
+     */
     @Override
     public void addAgencies(String agenciesStr) {
         String[] agenciesItems = agenciesStr.split(CATEG_DELIMITER);

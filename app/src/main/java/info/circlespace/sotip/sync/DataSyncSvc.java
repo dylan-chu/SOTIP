@@ -9,7 +9,7 @@ import android.os.IBinder;
 
 /**
  * This class implements a service to run the sync adapter.
- * <p/>
+ *
  * The code in this class is based on code in Udacity's Advanced Android Development course's Github repo.
  */
 public class DataSyncSvc extends Service {

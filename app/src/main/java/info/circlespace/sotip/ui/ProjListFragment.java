@@ -28,7 +28,9 @@ import info.circlespace.sotip.api.AgencyInfo;
 import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract.ProjectEntry;
 
-
+/**
+ * Displays a list of projects for one agency.
+ */
 public class ProjListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     public static final String LOG_TAG = ProjListFragment.class.getSimpleName();
@@ -216,12 +218,12 @@ public class ProjListFragment extends Fragment implements LoaderManager.LoaderCa
         mEmptyVw.setVisibility(View.GONE);
         mListVw.setVisibility(View.VISIBLE);
 
-        // data has been loaded so we select the first item when it gets put into the list
         if (SotipApp.IS_DUAL_PANE) {
             mListVw.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
                     if (mListVw.getChildCount() > 0) {
+                        // data has been loaded so we select the first item in the list
                         mListVw.getViewTreeObserver().removeOnPreDrawListener(this);
                         RecyclerView.ViewHolder vh = mListVw.findViewHolderForAdapterPosition(0);
                         if (vh != null) {
@@ -258,6 +260,9 @@ public class ProjListFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
 
+    /**
+     * Shows a list of projects for the previous agency.
+     */
     public void onLeftSwipe() {
         SotipApp.AGC_NDX--;
         if (SotipApp.AGC_NDX < 0) {
@@ -267,6 +272,9 @@ public class ProjListFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
 
+    /**
+     * Shows a list of projects for the next agency.
+     */
     public void onRightSwipe() {
         SotipApp.AGC_NDX++;
         if (SotipApp.AGC_NDX >= SotipApp.AGENCIES.size()) {
@@ -276,6 +284,9 @@ public class ProjListFragment extends Fragment implements LoaderManager.LoaderCa
     }
 
 
+    /**
+     * Displays the logo and loads the projects for the agency.
+     */
     private void showProjects() {
         mAgencyCode = SotipApp.AGENCIES.get(SotipApp.AGC_NDX);
         mAgcImg.setImageResource(SotipApp.getAgencyIcon(mAgencyCode));

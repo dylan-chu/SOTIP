@@ -29,7 +29,9 @@ import info.circlespace.sotip.R;
 import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.sync.DataSyncAdptr;
 
-
+/**
+ * This class sets up the drawer navigation mechanism and determines which fragment(s) to display.
+ */
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,14 +52,17 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // stores a reference to the view to show snackbars
         mCoordinator = (CoordinatorLayout) findViewById(R.id.coordinator);
         SotipApp.mCoordinator = mCoordinator;
 
+        // stores references to the main UI thread and the loading indicator
         mLoadingIndic = (ProgressBar) findViewById(R.id.loadingIndic);
         mLoadingIndic.setVisibility(View.GONE);
         SotipApp.mMainHandler = new Handler(getMainLooper());
         SotipApp.mLoadingIndic = mLoadingIndic;
 
+        // checks whether the app has successfully loaded data from the server at least once
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         SotipApp.IS_INITD = prefs.getBoolean(SotipApp.IS_INITD_KEY, false);
 
@@ -66,6 +71,7 @@ public class MainActivity extends AppCompatActivity
 
         Configuration config = getResources().getConfiguration();
 
+        // determine the width of the screen in portrait mode
         if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
             SotipApp.SCREEN_WIDTH = config.screenWidthDp;
             SotipApp.SCREEN_HEIGHT = config.screenHeightDp;
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity
             SotipApp.LOCKED_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         }
 
+        // locks the orientation to landscape for tablets and portrait for phones
         setRequestedOrientation(SotipApp.LOCKED_ORIENTATION);
 
         mFrgm = new CostVarFragment();
@@ -113,6 +120,7 @@ public class MainActivity extends AppCompatActivity
             }
         }
 
+        // get the tracker for Google Analytics
         ((SotipApp) getApplication()).startTracking();
     }
 
@@ -124,6 +132,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    /**
+     * Displays the right fragment(s) based on the chosen drawer navigation option.
+     */
     private void showChart(int chartType) {
         switch (chartType) {
             case SotipApp.CHART_TYPE_COST_VAR:
@@ -206,30 +217,6 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(SotipApp.UPD_DATE_KEY, "1900-01-01");
-            editor.putBoolean(SotipApp.IS_INITD_KEY, false);
-            editor.commit();
-
-            DataSyncAdptr.syncImmediately(this);
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -259,13 +246,4 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-/*
-    public void showLoadingIndicator() {
-        mLoadingBar.setVisibility(View.VISIBLE);
-    }
-
-    public void removeLoadingIndicator() {
-        mLoadingBar.setVisibility(View.GONE);
-    }
-*/
 }

@@ -44,6 +44,7 @@ import info.circlespace.sotip.sync.DataSyncAdptr;
  */
 public class SotipApp extends Application {
 
+    // for managing the loading of data from the server
     public static final String IS_INITD_KEY = "is.initd";
     public static boolean IS_INITD = false;
     public static boolean IS_LOADING = false;
@@ -57,8 +58,18 @@ public class SotipApp extends Application {
     public static String API_CALL_ERR_MSG = "";
     public static String API_DATA_ERR_MSG = "";
 
-    public static boolean IS_DUAL_PANE = false;
+    public static final String UPD_DATE_KEY = "upd.date";
+    public static final String PARAM_DATE = "date";
+    public static final String DEFAULT_DATE = "1900-01-01";
 
+    // for managing the display configuration
+    public static boolean IS_DUAL_PANE = false;
+    public static int SCREEN_WIDTH = 0;
+    public static int SCREEN_HEIGHT = 0;
+    public static int LOCKED_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
+    public static final int TABLET_DP = 600;
+
+    // text formatters
     public static NumberFormat PERC_FMTR = NumberFormat.getPercentInstance();
     public static final int MAX_DECIMALS = 1;
     public static NumberFormat COST_FMTR = NumberFormat.getCurrencyInstance();
@@ -66,17 +77,9 @@ public class SotipApp extends Application {
     public static DateFormat DISPLAY_DATE_FMTR = DateFormat.getDateInstance();
     public static SimpleDateFormat DATE_FMTR = new SimpleDateFormat("yyyy-MM-dd");
 
-    public static int SCREEN_WIDTH = 0;
-    public static int SCREEN_HEIGHT = 0;
-    public static int LOCKED_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-    public static final int TABLET_DP = 600;
-
-    public static final String UPD_DATE_KEY = "upd.date";
-    public static final String PARAM_DATE = "date";
-    public static final String DEFAULT_DATE = "1900-01-01";
-
     public static Map<String, AgencyInfo> ALL_AGENCIES = null;
 
+    // data constants
     public static final String PROJ_STATUS_IN_PROG = "In-Progress";
     public static final String PROJ_STATUS_COMPLTD = "Completed";
     public static final int CODE_PROJ_STATUS_IN_PROG = 50;
@@ -137,6 +140,9 @@ public class SotipApp extends Application {
     public static String[] SDM_DESCS;
     public static int SDM_OTHER = 6;
 
+    public static String[] CIO_RATINGS;
+
+    // for managing the selection of a category and transitioning to a list of projects
     public static int GROUP_NDX = -1;
     public static int PM_GROUP_NDX = 0;
     public static int SDM_GROUP_NDX = 0;
@@ -147,8 +153,6 @@ public class SotipApp extends Application {
     public static int PROJECT_ID = 0;
     public static String INVESTMENT_ID = "000";
     public static String AGENCY_CODE = "000";
-
-    public static String[] CIO_RATINGS;
 
     private Tracker mTracker;
 
@@ -162,6 +166,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Sets up data and formatting constants.
+     */
     private void setupData() {
         PERC_FMTR.setMaximumFractionDigits(MAX_DECIMALS);
 
@@ -186,68 +193,10 @@ public class SotipApp extends Application {
     }
 
 
-    public static void showLoadingIndicator( final boolean shouldShow ) {
-        if ( mMainHandler == null )
-            return;
-
-        Runnable myRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (shouldShow) {
-                    mLoadingIndic.setVisibility(View.VISIBLE);
-                } else {
-                    mLoadingIndic.setVisibility(View.GONE);
-                }
-            }
-        };
-        mMainHandler.post(myRunnable);
-    }
-
-
-    public static void startLoading() {
-        IS_LOADING = true;
-        updateLoadingPerc(0);
-        showLoadingIndicator(true);
-    }
-
-
-    public static void updateLoadingPerc( double perc ) {
-        LOAD_MSG =  INIT_MSG + ": " + PERC_FMTR.format( perc );
-    }
-
-
-    public static void stopLoading( int errorCode ) {
-        IS_LOADING = false;
-        showLoadingIndicator(false);
-
-        switch (errorCode) {
-            case API_CALL_ERR:
-                LOAD_MSG = API_CALL_ERR_MSG;
-                break;
-            case API_DATA_ERR:
-                LOAD_MSG = API_DATA_ERR_MSG;
-                break;
-
-        }
-    }
-
-
-    public static void completeLoading( Context ctx, String loadDate, List<AgencyInfo> items ) {
-        IS_LOADING = false;
-        updateLoadingPerc( 1 );
-        showLoadingIndicator(false);
-
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(UPD_DATE_KEY, loadDate);
-        editor.putBoolean(IS_INITD_KEY, true);
-        editor.commit();
-
-        IS_INITD = true;
-        addAgencies( items );
-    }
-
-
+    /**
+     * Preloads the data for all the agencies.  The number of records for agencies is very small so
+     * we don't have to do the preload on a background thread.
+     */
     public void loadAllAgencies() {
         ALL_AGENCIES = new HashMap<String, AgencyInfo>();
 
@@ -281,6 +230,87 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Shows a loading indicator.
+     */
+    public static void showLoadingIndicator( final boolean shouldShow ) {
+        if ( mMainHandler == null )
+            return;
+
+        // this allows this function to be called from a thread that is not the main UI thread
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (shouldShow) {
+                    mLoadingIndic.setVisibility(View.VISIBLE);
+                } else {
+                    mLoadingIndic.setVisibility(View.GONE);
+                }
+            }
+        };
+        mMainHandler.post(myRunnable);
+    }
+
+
+    /**
+     * Indicates a data load is beginning.
+     */
+    public static void startLoading() {
+        IS_LOADING = true;
+        updateLoadingPerc(0);
+        showLoadingIndicator(true);
+    }
+
+
+    /**
+     * Updates the percentage completed for the data load.
+     */
+    public static void updateLoadingPerc( double perc ) {
+        LOAD_MSG =  INIT_MSG + ": " + PERC_FMTR.format( perc );
+    }
+
+
+    /**
+     * Indicates a data load has ended with an error.
+     */
+    public static void stopLoading( int errorCode ) {
+        IS_LOADING = false;
+        showLoadingIndicator(false);
+
+        switch (errorCode) {
+            case API_CALL_ERR:
+                LOAD_MSG = API_CALL_ERR_MSG;
+                break;
+            case API_DATA_ERR:
+                LOAD_MSG = API_DATA_ERR_MSG;
+                break;
+
+        }
+    }
+
+
+    /**
+     * Indicates a data load has ended successfully.
+     */
+    public static void completeLoading( Context ctx, String loadDate, List<AgencyInfo> items ) {
+        IS_LOADING = false;
+        updateLoadingPerc( 1 );
+        showLoadingIndicator(false);
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(UPD_DATE_KEY, loadDate);
+        editor.putBoolean(IS_INITD_KEY, true);
+        editor.commit();
+
+        IS_INITD = true;
+        addAgencies( items );
+    }
+
+
+    /**
+     * Appends new agencies to the list of agencies.
+     */
     public static void addAgencies(List<AgencyInfo> items) {
         for (AgencyInfo item : items) {
             ALL_AGENCIES.put(item.getAc(), item);
@@ -288,6 +318,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Retrieves an agency from the list of agencies.
+     */
     public static AgencyInfo getAgency(String code) {
         AgencyInfo agency = ALL_AGENCIES.get(code);
         if (agency == null) {
@@ -300,6 +333,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Returns the logo for an agency.
+     */
     public static int getAgencyIcon(String agencyCode) {
 
         if (agencyCode.equals(CODE_005_USDA)) {
@@ -360,6 +396,10 @@ public class SotipApp extends Application {
         return R.drawable.d005_usda_40;
     }
 
+
+    /**
+     * Returns the color to represent a variance category.
+     */
     public static int getVarColour(int varCode) {
         switch (varCode) {
             case 5:
@@ -380,6 +420,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Returns the color to represent a performance category.
+     */
     public static int getPerfDrawable(int perfCode) {
         switch (perfCode) {
             case 4:
@@ -402,18 +445,26 @@ public class SotipApp extends Application {
         return PERF_DESCS[ndx];
     }
 
+
     public static int getPerfColour(int ndx) {
         return PERF_COLOURS[ndx];
     }
+
 
     public static String getPmLvlDesc(int code) {
         return PM_LVL_DESCS[code - 1];
     }
 
+
     public static String getSdmDesc(int code) {
         return SDM_DESCS[code - 1];
     }
 
+
+    /**
+     * Returns the full description of a software development methodology if it is "Other"
+     * @return
+     */
     public static String getSdmDesc(int code, String otherSdm) {
         if (code == SDM_OTHER)
             return otherSdm;
@@ -434,12 +485,14 @@ public class SotipApp extends Application {
 
     public static String displayDate(String date) {
         String dateStr = "?";
+
         try {
             Date dt = DATE_FMTR.parse(date);
             dateStr = DISPLAY_DATE_FMTR.format(dt);
         } catch (ParseException pe) {
 
         }
+
         return dateStr;
     }
 
@@ -477,6 +530,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Determines if the app has successfully loaded data from the server at least once.
+     */
     public static boolean isInitd(Context ctx) {
         if (IS_INITD) {
             return true;
@@ -508,6 +564,9 @@ public class SotipApp extends Application {
     }
 
 
+    /**
+     * Displays a snackbar for an Activity.
+     */
     public static void showStatusMsg(String msg) {
         if (mCoordinator == null) {
             return;

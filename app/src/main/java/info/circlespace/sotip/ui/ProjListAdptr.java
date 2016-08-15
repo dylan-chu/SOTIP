@@ -18,7 +18,9 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.api.ProjectInfo;
 import info.circlespace.sotip.data.SotipContract.ProjectEntry;
 
-
+/**
+ * The adapter for the list of projects.
+ */
 public class ProjListAdptr extends RecyclerView.Adapter<ProjListAdptr.VwHldr> {
 
     public static final String LOG_TAG = ProjListAdptr.class.getSimpleName();
@@ -53,7 +55,6 @@ public class ProjListAdptr extends RecyclerView.Adapter<ProjListAdptr.VwHldr> {
 
 
     public class VwHldr extends RecyclerView.ViewHolder implements View.OnClickListener {
-        //public TextView agcCode;
         public ImageView schColour;
         public ImageView costColour;
         public TextView invmtTitle;
@@ -119,6 +120,8 @@ public class ProjListAdptr extends RecyclerView.Adapter<ProjListAdptr.VwHldr> {
 
     @Override
     public void onBindViewHolder(VwHldr holder, int position) {
+        // the cursor returns results sorted first by investment ids and then by project ids
+        // this allows the detection of when there is data for a new investment
         String prevUniqInvmtId = "";
         if (position > 0) {
             mCursor.moveToPosition(position - 1);
@@ -131,6 +134,7 @@ public class ProjListAdptr extends RecyclerView.Adapter<ProjListAdptr.VwHldr> {
         holder.schColour.setImageResource(SotipApp.getVarColour(mCursor.getInt(COL_SCH_VAR)));
         holder.costColour.setImageResource(SotipApp.getVarColour(mCursor.getInt(COL_COST_VAR)));
 
+        // display the investment title if it is first project in the investment
         if (uniqInvmtId.equals(prevUniqInvmtId)) {
             holder.invmtTitle.setVisibility(View.GONE);
         } else {

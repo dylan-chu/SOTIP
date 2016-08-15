@@ -29,6 +29,9 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.data.SotipContract.AgencyEntry;
 
 
+/**
+ * Displays the details for an agency.
+ */
 public class AgcDetailsFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, OnMapReadyCallback {
 
     public static final String LOG_TAG = AgcDetailsFragment.class.getSimpleName();

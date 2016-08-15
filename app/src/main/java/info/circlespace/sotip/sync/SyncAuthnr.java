@@ -12,7 +12,7 @@ import android.os.Bundle;
 
 /**
  * This class implements the account authenticator used by the sync adapter.
- * <p/>
+ *
  * The code is derived from code in the Github repo for Udacity's Advanced Android Development course.
  */
 public class SyncAuthnr extends AbstractAccountAuthenticator {

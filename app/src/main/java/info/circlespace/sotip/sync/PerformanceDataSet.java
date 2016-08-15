@@ -6,7 +6,9 @@ package info.circlespace.sotip.sync;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * This class holds data for each performance category.
+ */
 public class PerformanceDataSet implements SotipDataSet {
 
     public static final String CATEG_DELIMITER = "-";
@@ -14,8 +16,11 @@ public class PerformanceDataSet implements SotipDataSet {
 
     public static final int NUM_CATEGORIES = 5;
 
+    // the number of projects in each performance cateogry
     private int[] mDataSet;
+    // the percentage of projects in each performance category
     private float[] mPercSet;
+    // the agencies which have projects in each performance category
     private List<String>[] mAgencies;
 
 
@@ -37,6 +42,9 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns the number of projects for each performance category as a string
+     */
     @Override
     public String getDataAsStr() {
         StringBuffer buf = new StringBuffer();
@@ -51,6 +59,9 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses a string which contains the number of projects in each performance category
+     */
     @Override
     public void addData(String dataStr) {
         String[] dataItems = dataStr.split(DELIMITER);
@@ -71,6 +82,9 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Calculates the percent of projects for each performance category based on the number of projects for each category.
+     */
     private void calcPercs() {
         float total = (float) getTotal();
 
@@ -81,6 +95,9 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns the total number of projects for all performance categories.
+     */
     @Override
     public int getTotal() {
         int total = 0;
@@ -93,16 +110,11 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Parses a string which contains a list of agency codes for each performance category.
+     */
     @Override
     public void addAgencies(String agenciesStr) {
-        /**
-         * If there are no projects for a specific category, then there will be no agencies associated
-         * that specific category either.  We need to replace the empty string with a '0' to keep
-         */
-        if (agenciesStr.endsWith(DELIMITER)) {
-            agenciesStr = agenciesStr.concat("0");
-        }
-
         String[] agenciesItems = agenciesStr.split(CATEG_DELIMITER);
 
         for (int i = 0; i < NUM_CATEGORIES; i++) {
@@ -115,6 +127,9 @@ public class PerformanceDataSet implements SotipDataSet {
     }
 
 
+    /**
+     * Returns a list of agencies for a performance category.
+     */
     public List<String> getAgencies(int ndx) {
         return mAgencies[ndx];
     }

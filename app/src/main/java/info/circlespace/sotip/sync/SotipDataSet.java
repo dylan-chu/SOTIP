@@ -3,6 +3,9 @@
  */
 package info.circlespace.sotip.sync;
 
+/**
+ * Base class for holding data for the charts.
+ */
 public interface SotipDataSet {
 
     public String getDataAsStr();

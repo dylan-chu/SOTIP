@@ -25,7 +25,10 @@ import info.circlespace.sotip.SotipApp;
 import info.circlespace.sotip.data.SotipContract.ChartDataEntry;
 import info.circlespace.sotip.sync.VarianceDataSet;
 
-
+/**
+ * Displays a diagram with the breakdown of the percentage of projects in each
+ * variance category for schedule variance for all the projects.
+ */
 public class SchVarFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, View.OnClickListener {
 
     public static final String LOG_TAG = SchVarFragment.class.getSimpleName();
@@ -52,6 +55,7 @@ public class SchVarFragment extends Fragment implements LoaderManager.LoaderCall
 
         mTotalProjs = (TextView) rootView.findViewById(R.id.totalProjs);
 
+        // set up the view containers to be clickable
         mVarBoxes = new ViewGroup[NUM_CATEGS];
         mVarBoxes[0] = (ViewGroup) rootView.findViewById(R.id.varBox0);
         mVarBoxes[1] = (ViewGroup) rootView.findViewById(R.id.varBox1);
@@ -72,15 +76,22 @@ public class SchVarFragment extends Fragment implements LoaderManager.LoaderCall
         mProjPercs[4] = (TextView) rootView.findViewById(R.id.percNdx4);
         mProjPercs[5] = (TextView) rootView.findViewById(R.id.percNdx5);
 
+        // start with displaying dummy data in the chart
         SotipApp.CHART_TYPE = SotipApp.CHART_TYPE_SCH_VAR;
         mDataSet = new VarianceDataSet();
         showChartData();
+
+        // check whether the app is initialized
         SotipApp.isInitd(getActivity());
 
         return rootView;
     }
 
 
+    /**
+     * Displays the percentage of projects in a performance category along with a textual description
+     * of that category.
+     */
     private void showChartData() {
         Resources res = getResources();
         mTotalProjs.setText(String.format(res.getString(R.string.a11y_total_projects), mDataSet.getTotal()));
@@ -111,6 +122,8 @@ public class SchVarFragment extends Fragment implements LoaderManager.LoaderCall
     @Override
     public void onClick(View vw) {
 
+        // prevent the app from showing a list of projects if the app has not
+        // successfully loaded data from the server at least once
         if (!SotipApp.isInitd(getActivity())) {
             return;
         }
@@ -141,6 +154,7 @@ public class SchVarFragment extends Fragment implements LoaderManager.LoaderCall
                 break;
         }
 
+        // store the category that was clicked along with the agencies associated with that category
         SotipApp.AGENCIES = mDataSet.getAgencies(SotipApp.DATA_LVL);
         SotipApp.AGC_NDX = 0;
 

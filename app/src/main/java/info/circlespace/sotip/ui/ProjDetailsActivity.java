@@ -20,7 +20,9 @@ import java.util.List;
 import info.circlespace.sotip.R;
 import info.circlespace.sotip.SotipApp;
 
-
+/**
+ * Displays the details for a project, investment and agency.
+ */
 public class ProjDetailsActivity extends AppCompatActivity {
 
     @Override
