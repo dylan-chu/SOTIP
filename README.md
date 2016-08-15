@@ -17,5 +17,9 @@ SOTIP is a mobile app to view the state of the IT projects tracked by [IT Dashbo
 ![Project Status Charts](/screenshots/screenshot-diff_proj_status.png) 
 ![Project List and Details](/screenshots/screenshot-proj_list_and_details.png)
 
+## Requirements
+* Put the Google Maps API key in AndroidManifest.xml
+* Put the Google Analytics tracker ID in res/xml/analytics.xml
+
 ## License
 Released under the [MIT License](http://creativecommons.org/licenses/MIT/).
