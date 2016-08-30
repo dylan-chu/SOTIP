@@ -1,5 +1,5 @@
 # SOTIP
-SOTIP is a mobile app to view the state of the IT projects tracked by [IT Dashboard](https://itdashboard.gov/).  It is meant as a reference tool for researchers and teachers.  More details are given in the [design specifications] (https://github.com/dylan-chu/Capstone-Project/blob/master/Capstone_Stage1.pdf). 
+SOTIP is a mobile app to view the state of the IT projects tracked by [IT Dashboard](https://itdashboard.gov/).  It is meant as a reference tool for researchers and teachers.  More details are given in the [design specifications] (/Capstone_Stage1.pdf). 
 
 ## Features
 * View how IT projects are performing in terms of their cost and schedule estimates
